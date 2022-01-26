@@ -2,6 +2,7 @@ package com.dhivakar;
 
 import com.dhivakar.exception.NoArgumentException;
 import com.dhivakar.model.AudioTag;
+import lombok.extern.slf4j.Slf4j;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
@@ -14,15 +15,18 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 
+@Slf4j
 public class SongExtractor {
 
     public static void main(String[] args) throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException, NoArgumentException {
 
         if (args.length == 1) {
 
-            initializeFileExtraction(args[1]);
+            log.info("Song Extractor Starting with Input : {}", args[0]);
+            initializeFileExtraction(args[0]);
 
         } else {
             throw new NoArgumentException("No Arguments were Provided for Reading the File");
@@ -30,9 +34,10 @@ public class SongExtractor {
 
     }
 
-    private static boolean initializeFileExtraction(String filePath) {
+    private static void initializeFileExtraction(String filePath) {
 
         File file = new File(filePath);
+
 
         if (file.isFile()) {
             processFile(file);
@@ -41,12 +46,13 @@ public class SongExtractor {
             processDirectory(file);
         }
 
-        return false;
     }
 
     private static void processDirectory(File file) {
 
-        File[] files = file.listFiles();
+        FilenameFilter filter = (dir, name) -> name.endsWith(".mp3");
+
+        File[] files = file.listFiles(filter);
 
         for (File eachFile : files) {
             processFile(eachFile);
@@ -72,10 +78,8 @@ public class SongExtractor {
 
         AudioTag processedTagInfo = processTags(audioTag);
 
-
-
         try {
-            updateTagValues(audioTag,processedTagInfo);
+            updateTagValues(audioTag, processedTagInfo);
             AudioFileIO.write(audioFile);
         } catch (CannotWriteException e) {
             e.printStackTrace();
@@ -105,8 +109,4 @@ public class SongExtractor {
         return inputTag;
     }
 
-
-    private void extractInfo() {
-
-    }
 }

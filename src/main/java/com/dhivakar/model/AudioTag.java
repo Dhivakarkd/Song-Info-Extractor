@@ -24,7 +24,7 @@ public class AudioTag {
     }
 
     public void setGenre(String genre) {
-        Genre = replaceAll(genre);
+        Genre = "Tamil";
     }
 
     private String replaceAll(String input) {
@@ -32,6 +32,10 @@ public class AudioTag {
         input = input.replace("-StarMusiQ.Com", "");
         input = input.replace("- MassTamilan.fm", "");
         input = input.replace(" -StarMusiQ.Top", "");
+        input = input.replace("- MassTamilan.com", "");
+        input = input.replace("- MassTamilan.io", "");
+        input = input.replace("- Masstamilan.In", "");
+        input = input.replace("- MassTamilan.org", "");
 
         return input;
     }
