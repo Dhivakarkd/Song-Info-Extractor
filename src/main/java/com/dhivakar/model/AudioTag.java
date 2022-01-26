@@ -1,6 +1,5 @@
 package com.dhivakar.model;
 
-import lombok.Data;
 import lombok.Getter;
 
 @Getter
