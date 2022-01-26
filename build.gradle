@@ -2,12 +2,15 @@ plugins {
     id 'java'
 }
 
-group 'org.dhivakar'
-version '1.0'
-
 repositories {
     mavenCentral()
 }
+
+
+group 'org.dhivakar'
+version '1.0'
+
+
 
 dependencies {
     // https://mvnrepository.com/artifact/org/jaudiotagger
@@ -30,4 +33,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Class-Path': configurations.runtimeClasspath.collect{it.toURI().toString()}.join(' '),
+                'Main-Class': 'com.dhivakar.SongExtractor'
+        )
+
+    }
 }
