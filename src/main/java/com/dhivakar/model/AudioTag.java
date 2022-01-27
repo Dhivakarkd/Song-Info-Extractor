@@ -57,7 +57,7 @@ public class AudioTag {
         input = input.replace("MassTamilan.io", "");
         input = input.replace("Masstamilan.In", "");
         input = input.replace("Masstamilan.in", "");
-        input = input.replace("MassTamilan.org", "");
+        input = input.replace("MassTamilan.fm", "");
 
         return input;
     }
