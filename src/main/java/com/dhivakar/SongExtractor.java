@@ -28,7 +28,7 @@ public class SongExtractor {
             log.info("Song Extractor Starting with Input : {}", args[0]);
             initializeFileExtraction(args[0], "N");
 
-        } else if (args.length == 2) {
+        } else if (args.length == 2 ) {
             initializeFileExtraction(args[0], args[1]);
         } else {
             throw new NoArgumentException("No Arguments were Provided for Reading the File");
