@@ -1,6 +1,7 @@
 package com.dhivakar.model;
 
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 public class AudioTag {
@@ -9,56 +10,59 @@ public class AudioTag {
     private String Artist;
     private String Album;
     private String Genre;
+    private String Lyrics;
 
     public void setTitle(String title) {
-        if(title != null) {
+        if (title != null) {
             Title = replaceAll(title);
-        }else{
+        } else {
             Title = "";
         }
     }
 
     public void setArtist(String artist) {
-        if(artist != null) {
+        if (artist != null) {
             Artist = replaceAll(artist);
-        }else{
+        } else {
             Artist = "";
         }
     }
 
     public void setAlbum(String album) {
-        if(album != null) {
+        if (album != null) {
             Album = replaceAll(album);
-        }else{
+        } else {
             Album = "";
         }
     }
 
     public void setGenre(String genre) {
-        if(genre != null) {
+        if (genre != null) {
             Genre = replaceAll(genre);
-        }else{
+        } else {
             Genre = "Tamil";
+        }
+    }
+
+    public void setLyrics(String lyrics) {
+
+        if(lyrics != null){
+            Lyrics = lyrics;
+        }else{
+            Lyrics = "No Lyrics Found";
         }
     }
 
     private String replaceAll(String input) {
 
-        input = input.replace("-StarMusiQ.Com", "");
-        input = input.replace("- MassTamilan.fm", "");
-        input = input.replace("-StarMusiQ.Top", "");
-        input = input.replace("-StarMusiQ.Fun", "");
-        input = input.replace("- MassTamilan.com", "");
-        input = input.replace("- MassTamilan.io", "");
-        input = input.replace("- Masstamilan.In", "");
-        input = input.replace("-Masstamilan.in", "");
-        input = input.replace("- MassTamilan.org", "");
-        input = input.replace("MassTamilan.com", "");
-        input = input.replace("MassTamilan.io", "");
-        input = input.replace("Masstamilan.In", "");
-        input = input.replace("Masstamilan.in", "");
-        input = input.replace("MassTamilan.fm", "");
+        final String[] keys = {"-StarMusiQ.Com", "- MassTamilan.fm", "-StarMusiQ.Top", "-StarMusiQ.Fun",
+                "- MassTamilan.com", "- MassTamilan.io", "- Masstamilan.In", "-Masstamilan.in",
+                "- MassTamilan.org", "MassTamilan.com", "MassTamilan.io", "Masstamilan.In",
+                "Masstamilan.in", "MassTamilan.fm"
+        };
+        final String[] values = {"", "", "", "", "","", "", "", "", "","", "", "", ""};
 
-        return input;
+        return StringUtils.replaceEach(input, keys, values);
+
     }
 }
