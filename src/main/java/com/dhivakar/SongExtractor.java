@@ -26,40 +26,45 @@ public class SongExtractor {
         if (args.length == 1) {
 
             log.info("Song Extractor Starting with Input : {}", args[0]);
-            initializeFileExtraction(args[0]);
+            initializeFileExtraction(args[0], "N");
 
+        } else if (args.length == 2 ) {
+            initializeFileExtraction(args[0], args[1]);
         } else {
+
             throw new NoArgumentException("No Arguments were Provided for Reading the File");
         }
 
     }
 
-    private static void initializeFileExtraction(String filePath) {
+    private static void initializeFileExtraction(String filePath, String needLyrics) {
 
         File file = new File(filePath);
 
+        boolean lyricsStatus = needLyrics.equalsIgnoreCase("y");
+
 
         if (file.isFile()) {
-            processFile(file);
+            processFile(file, lyricsStatus);
 
         } else if (file.isDirectory()) {
-            processDirectory(file);
+            processDirectory(file, lyricsStatus);
         }
 
     }
 
-    private static void processDirectory(File file) {
+    private static void processDirectory(File file, boolean needTamilLyrics) {
 
         FilenameFilter filter = (dir, name) -> name.endsWith(".mp3");
 
         File[] files = file.listFiles(filter);
 
         for (File eachFile : files) {
-            processFile(eachFile);
+            processFile(eachFile, needTamilLyrics);
         }
     }
 
-    private static void processFile(File file) {
+    private static void processFile(File file, boolean needTamilLyrics) {
         AudioFile audioFile = null;
         try {
             audioFile = AudioFileIO.read(file);
@@ -76,7 +81,7 @@ public class SongExtractor {
         }
         Tag audioTag = audioFile.getTag();
 
-        AudioTag processedTagInfo = processTags(audioTag);
+        AudioTag processedTagInfo = processTags(audioTag, needTamilLyrics);
 
         try {
             updateTagValues(audioTag, processedTagInfo);
@@ -94,10 +99,11 @@ public class SongExtractor {
         audioTag.setField(FieldKey.TITLE, processedTagInfo.getTitle());
         audioTag.setField(FieldKey.ARTIST, processedTagInfo.getArtist());
         audioTag.setField(FieldKey.GENRE, processedTagInfo.getGenre());
+        audioTag.setField(FieldKey.LYRICS, processedTagInfo.getLyrics());
 
     }
 
-    private static AudioTag processTags(Tag audioTag) {
+    private static AudioTag processTags(Tag audioTag, boolean needTamilLyrics) {
 
         AudioTag inputTag = new AudioTag();
 
@@ -106,6 +112,17 @@ public class SongExtractor {
         inputTag.setArtist(audioTag.getFirst(FieldKey.ARTIST));
         inputTag.setGenre(audioTag.getFirst(FieldKey.GENRE));
 
+        String lyrics = null;
+        if (needTamilLyrics) {
+
+            lyrics = LyricsHelper.fetchLyrics(inputTag.getTitle(), true);
+        } else {
+            lyrics = LyricsHelper.fetchLyrics(inputTag.getTitle(), false);
+        }
+
+        inputTag.setLyrics(lyrics);
+
+        log.info(inputTag.toString());
         return inputTag;
     }
 
