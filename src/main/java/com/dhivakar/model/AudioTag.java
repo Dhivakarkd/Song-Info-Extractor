@@ -1,9 +1,11 @@
 package com.dhivakar.model;
 
 import lombok.Getter;
+import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 @Getter
+@ToString
 public class AudioTag {
 
     private String Title;

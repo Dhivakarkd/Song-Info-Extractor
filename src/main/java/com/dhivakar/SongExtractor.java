@@ -17,18 +17,22 @@ import org.jaudiotagger.tag.TagException;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.logging.LogManager;
 
 @Slf4j
 public class SongExtractor {
 
     public static void main(String[] args) throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException, NoArgumentException {
 
+        // To disable unnecessary logging of JAudioTagger Library
+        LogManager.getLogManager().reset();
+
         if (args.length == 1) {
 
             log.info("Song Extractor Starting with Input : {}", args[0]);
             initializeFileExtraction(args[0], "N");
 
-        } else if (args.length == 2 ) {
+        } else if (args.length == 2) {
             initializeFileExtraction(args[0], args[1]);
         } else {
 
