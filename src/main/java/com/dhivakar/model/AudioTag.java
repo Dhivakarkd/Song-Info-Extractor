@@ -1,11 +1,9 @@
 package com.dhivakar.model;
 
 import lombok.Getter;
-import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 @Getter
-@ToString
 public class AudioTag {
 
     private String Title;
@@ -66,5 +64,17 @@ public class AudioTag {
 
         return StringUtils.replaceEach(input, keys, values);
 
+    }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("\n");
+        sb.append("Title='").append(Title).append("'\n");
+        sb.append("Artist='").append(Artist).append("'\n");
+        sb.append("Album='").append(Album).append("'\n");
+        sb.append("Genre='").append(Genre).append("'\n");
+        sb.append("Lyrics='").append(Lyrics).append("'\n");
+        return sb.toString();
     }
 }
