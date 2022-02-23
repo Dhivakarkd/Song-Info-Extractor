@@ -74,7 +74,7 @@ public class SongExtractor {
         try {
             audioFile = AudioFileIO.read(file);
         } catch (CannotReadException | IOException | ReadOnlyFileException | TagException | InvalidAudioFrameException e) {
-            log.error("Exception occurred During Reading MetaData from Audio File : ",e);
+            log.error("Exception occurred During Reading MetaData from Audio File : ", e);
         }
         Tag audioTag = audioFile.getTag();
 
@@ -84,7 +84,7 @@ public class SongExtractor {
             updateTagValues(audioTag, processedTagInfo);
             AudioFileIO.write(audioFile);
         } catch (CannotWriteException | FieldDataInvalidException e) {
-            log.error("Exception occurred During Writing MetaData from Audio File : ",e);
+            log.error("Exception occurred During Writing MetaData from Audio File : ", e);
 
         }
     }
