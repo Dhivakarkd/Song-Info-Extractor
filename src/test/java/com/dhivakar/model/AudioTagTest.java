@@ -11,10 +11,10 @@ class AudioTagTest {
 
         AudioTag tag = new AudioTag();
 
-        tag.setGenre("Tamil");
-        tag.setArtist("Test Artist");
-        tag.setTitle("Test song");
-        tag.setAlbum("Test Album");
+        tag.setGenre("Tamil- MassTamilan.so");
+        tag.setArtist("Test Artist - MassTamilan.so");
+        tag.setTitle("Test song - MassTamilan.so");
+        tag.setAlbum("Test Album - MassTamilan.so");
         tag.setLyrics("No Lyrics");
 
         System.out.println(tag);

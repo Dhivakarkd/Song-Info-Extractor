@@ -55,14 +55,9 @@ public class AudioTag {
 
     private String replaceAll(String input) {
 
-        final String[] keys = {"-StarMusiQ.Com", "- MassTamilan.fm", "-StarMusiQ.Top", "-StarMusiQ.Fun",
-                "- MassTamilan.com", "- MassTamilan.io", "- Masstamilan.In", "-Masstamilan.in",
-                "- MassTamilan.org", "MassTamilan.com", "MassTamilan.io", "Masstamilan.In",
-                "Masstamilan.in", "MassTamilan.fm"
-        };
-        final String[] values = {"", "", "", "", "","", "", "", "", "","", "", "", ""};
+        int index= StringUtils.lastIndexOf(input,"-");
 
-        return StringUtils.replaceEach(input, keys, values);
+        return StringUtils.substring(input,0,index);
 
     }
 
