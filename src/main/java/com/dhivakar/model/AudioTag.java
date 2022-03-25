@@ -11,6 +11,8 @@ public class AudioTag {
     private String Album;
     private String Genre;
     private String Lyrics;
+    private String AlbumArtist;
+    private String Composer;
 
     public void setTitle(String title) {
         if (title != null) {
@@ -61,6 +63,21 @@ public class AudioTag {
 
     }
 
+    public void setAlbumArtist(String albumArtist) {
+        if (albumArtist != null) {
+            AlbumArtist = replaceAll(albumArtist);
+        } else {
+            AlbumArtist = "";
+        }
+    }
+
+    public void setComposer(String composer) {
+        if (composer != null) {
+            Composer = replaceAll(composer);
+        } else {
+            Composer = "";
+        }
+    }
 
     @Override
     public String toString() {

@@ -96,6 +96,8 @@ public class SongExtractor {
         audioTag.setField(FieldKey.ARTIST, processedTagInfo.getArtist());
         audioTag.setField(FieldKey.GENRE, processedTagInfo.getGenre());
         audioTag.setField(FieldKey.LYRICS, processedTagInfo.getLyrics());
+        audioTag.setField(FieldKey.COMPOSER, processedTagInfo.getComposer());
+        audioTag.setField(FieldKey.ALBUM_ARTIST, processedTagInfo.getAlbumArtist());
 
     }
 
@@ -107,6 +109,8 @@ public class SongExtractor {
         inputTag.setTitle(audioTag.getFirst(FieldKey.TITLE));
         inputTag.setArtist(audioTag.getFirst(FieldKey.ARTIST));
         inputTag.setGenre(audioTag.getFirst(FieldKey.GENRE));
+        inputTag.setComposer(audioTag.getFirst(FieldKey.COMPOSER));
+        inputTag.setAlbumArtist(audioTag.getFirst(FieldKey.ALBUM_ARTIST));
 
         String lyrics = null;
         if (needTamilLyrics) {
